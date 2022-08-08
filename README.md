@@ -1,5 +1,5 @@
 ## sars_assembly_1
-A collection of commands for sars-cov-2 genome assembly derived from ILLUMINA NEXTSEQ
+A collection of commands for sars-cov-2 genome assembly derived from ILLUMINA NEXTSEQ platform.
 
 ## STEP 0: just in case generate a naked script.sh file
 ```r
@@ -50,7 +50,7 @@ rm ${prefix}_uno.sam ${prefix}_unoa.bam ${prefix}_dosa.bam ${prefix}_tresa.bam $
 samtools mpileup -aa -A -d 0 -Q 0 ${prefix}.bam | ivar consensus -p ${prefix}.fasta -q 25 -t 0.6 -m 20 ;
 done ;
 
-#6# remover subproductos#
+#6# eliminar sub-productos#
 rm *.fastq.gz.fa *.qual.txt ; 
 cat *.fa > secuencias.fasta ;
 
