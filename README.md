@@ -74,13 +74,13 @@ ls -lh ;
 
 #0# juntar los fastq files generados por nextseq#
 mkdir fastq_55 ;
-mv */*fastq.gz fastq ;
-cd fastq ;
+mv */*fastq.gz fastq_55/ ;
+cd fastq_55/ ;
 ls -lh ;
 ls *fastq.gz | sed "s/_L.*//g" | sort | uniq > file.txt ; 
 lista=( `ls *gz | sed "s/_L.*//g" | sort -d | uniq`) ;
-for i in ${lista[@]};
-do cat ${i}_L001_R2_001.fastq.gz ${i}_L002_R2_001.fastq.gz ${i}_L003_R2_001.fastq.gz ${i}_L004_R2_001.fastq.gz > ../${i}_R2_001.fastq.gz; 
+for i in ${lista[@]} ;
+do cat ${i}_L001_R2_001.fastq.gz ${i}_L002_R2_001.fastq.gz ${i}_L003_R2_001.fastq.gz ${i}_L004_R2_001.fastq.gz > ../${i}_R2_001.fastq.gz ; 
 cat ${i}_L001_R1_001.fastq.gz ${i}_L002_R1_001.fastq.gz ${i}_L003_R1_001.fastq.gz ${i}_L004_R1_001.fastq.gz > ../${i}_R1_001.fastq.gz ;
 done & pwd ;
 cd .. ;
