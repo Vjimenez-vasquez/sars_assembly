@@ -118,8 +118,9 @@ rm *.fastq.gz.fa *.qual.txt ;
 cat *.fa > secuencias_55.fasta ;
 
 #7# identificar linajes con PANGOLIN#
+pangolin run secuencias_55.fasta -t 15 --outfile lineage_report_nextseq55.csv --max-ambig 0.1 --min-length 28000 ; 
 mkdir fasta_55 ; 
-mv secuencias_55.fasta fasta_55/ ; 
+mv secuencias_55.fasta lineage_report_nextseq55.csv fasta_55/ ; 
 
 #8# estimar la profunidad de cobertura y el porcentaje de Ns#
 for r1 in *bam
