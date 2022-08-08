@@ -18,11 +18,10 @@ ls -lh ;
 ls *fastq.gz | sed "s/_L.*//g" | sort | uniq > file.txt ; 
 lista=( `ls *gz | sed "s/_L.*//g" | sort -d | uniq`) ;
 for i in ${lista[@]};
-do cat ${i}_L001_R2_001.fastq.gz ${i}_L002_R2_001.fastq.gz ${i}_L003_R2_001.fastq.gz ${i}_L004_R2_001.fastq.gz > ../${i}_R2_001.fastq.gz; 
+do cat ${i}_L001_R2_001.fastq.gz ${i}_L002_R2_001.fastq.gz ${i}_L003_R2_001.fastq.gz ${i}_L004_R2_001.fastq.gz > ../${i}_R2_001.fastq.gz ; 
 cat ${i}_L001_R1_001.fastq.gz ${i}_L002_R1_001.fastq.gz ${i}_L003_R1_001.fastq.gz ${i}_L004_R1_001.fastq.gz > ../${i}_R1_001.fastq.gz ;
 done & pwd ;
 cd .. ;
-ls -lh ;
 
 #1# indexar el genoma de referencia#
 bwa index reference.fasta ;
@@ -51,7 +50,7 @@ samtools mpileup -aa -A -d 0 -Q 0 ${prefix}.bam | ivar consensus -p ${prefix}.fa
 done ;
 
 #6# eliminar sub-productos#
-rm *.fastq.gz.fa *.qual.txt ; 
+rm *.fastq.gz.fa *.qual.txt *.fastq.gz.tsv ; 
 cat *.fa > secuencias.fasta ;
 
 #7# estimar la profunidad de cobertura y el porcentaje de Ns#
@@ -84,7 +83,6 @@ do cat ${i}_L001_R2_001.fastq.gz ${i}_L002_R2_001.fastq.gz ${i}_L003_R2_001.fast
 cat ${i}_L001_R1_001.fastq.gz ${i}_L002_R1_001.fastq.gz ${i}_L003_R1_001.fastq.gz ${i}_L004_R1_001.fastq.gz > ../${i}_R1_001.fastq.gz ;
 done & pwd ;
 cd .. ;
-ls -lh ;
 
 #1# indexar el genoma de referencia#
 bwa index reference.fasta ;
@@ -114,13 +112,15 @@ samtools mpileup -aa -A -d 600000 -B -Q 0 ${prefix}.bam | ivar variants -p ${pre
 done ;
 
 #6# remover subproductos y generar un multifasta#
-rm *.fastq.gz.fa *.qual.txt ; 
+rm *.fastq.gz.fa *.qual.txt *.fastq.gz.tsv ;
 cat *.fa > secuencias_55.fasta ;
 
 #7# identificar linajes con PANGOLIN#
-pangolin run secuencias_55.fasta -t 15 --outfile lineage_report_nextseq55.csv --max-ambig 0.1 --min-length 28000 ; 
+conda activate pangolin ; 
+pangolin secuencias_55.fasta -t 15 --outfile lineage_report.csv --max-ambig 0.1 --min-length 28000 ;
+conda deactivate ; 
 mkdir fasta_55 ; 
-mv secuencias_55.fasta lineage_report_nextseq55.csv fasta_55/ ; 
+cp secuencias_55.fasta lineage_report.csv fasta_55/ ; 
 
 #8# estimar la profunidad de cobertura y el porcentaje de Ns#
 for r1 in *bam
@@ -130,4 +130,7 @@ DEP=( `samtools depth $r1 | awk '{sum+=$3}END{print sum/29903}' `)
 NPE=( `seqtk comp ${prefix}.fa | awk '{x=$3+$4+$5+$6;y=29903;print 1-(y-x)/y}'`)
 echo "${prefix} ${DEP}x $NPE" >> profundidad_ns.txt ;
 done ;
+
+#9# tabla final R#
+Rscript tabla_final.R ; 
 ```
