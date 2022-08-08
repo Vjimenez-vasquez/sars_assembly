@@ -1,6 +1,7 @@
-# sars_assembly
+## sars_assembly
 a collection of commands for sars-cov-2 genome assembly 
 
+```r
 #0# juntar los fastq files generados por nextseq#
 mkdir fastq ;
 mv */*fastq.gz fastq ;
@@ -53,4 +54,4 @@ DEP=( `samtools depth $r1 | awk '{sum+=$3}END{print sum/29903}' `)
 NPE=( `seqtk comp ${prefix}.fa | awk '{x=$3+$4+$5+$6;y=29903;print 1-(y-x)/y}'`)
 echo "${prefix} ${DEP}x $NPE" >> echo.txt ;
 done ;
-
+```
