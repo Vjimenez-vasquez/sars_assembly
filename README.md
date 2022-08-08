@@ -1,6 +1,14 @@
 ## sars_assembly_1
 A collection of commands for sars-cov-2 genome assembly derived from ILLUMINA NEXTSEQ
 
+## STEP 0: just in case generate a naked script.sh file
+```r
+cd $HOME && touch script.sh && chmod +x script.sh ;
+cd $HOME && echo '#!/bin/bash' > script.sh && echo '# -*- ENCODING: UTF-8 -*-' >> script.sh ;
+mv script.sh paste/your/working/directory/ ;
+```
+
+## STEP 1: the code
 ```r
 #0# juntar los fastq files generados por nextseq#
 mkdir fastq ;
