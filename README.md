@@ -1,6 +1,13 @@
 ## sars_assembly_1
 A collection of commands for sars-cov-2 genome assembly derived from ILLUMINA NEXTSEQ platform.
 
+## STEP -1: explanations
+```r
+merge_fastq.sh : merge 4 forward fastq files and 4 forward fastq files (only for NextSeq)
+only_assembly.sh : assembly pipeline
+tabla_final.R : prepare coverage, completeness and lineage identification table
+```
+
 ## STEP 0: just in case generate a naked script.sh file
 ```r
 cd $HOME && touch script.sh && chmod +x script.sh ;
