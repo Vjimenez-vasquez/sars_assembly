@@ -1,4 +1,4 @@
-## sars_assembly_1
+## sars_assembly (INS)
 A collection of commands for sars-cov-2 genome assembly derived from ILLUMINA NEXTSEQ platform.
 
 ## STEP -1: explanations
