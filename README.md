@@ -13,6 +13,10 @@ tabla_final.R : prepare coverage, completeness and lineage identification table
 cd $HOME && touch script.sh && chmod +x script.sh ;
 cd $HOME && echo '#!/bin/bash' > script.sh && echo '# -*- ENCODING: UTF-8 -*-' >> script.sh ;
 mv script.sh paste/your/working/directory/ ;
+
+or 
+
+chmod +x script.sh 
 ```
 
 ## STEP 1: the code
