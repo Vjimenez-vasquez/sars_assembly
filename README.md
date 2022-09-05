@@ -3,8 +3,8 @@ A collection of commands for sars-cov-2 genome assembly derived from ILLUMINA NE
 
 ## STEP -1: explanations
 ```r
-merge_fastq.sh : merge 4 forward fastq files and 4 forward fastq files (only for NextSeq)
-only_assembly.sh : assembly pipeline
+merge_fastq.sh : merge 4 forward fastq files and 4 reverse fastq files (run only for NextSeq results)
+only_assembly.sh : assembly pipeline (run directly to Miniseq results or after "merge_fastq.sh")
 tabla_final.R : prepare coverage, completeness and lineage identification table
 ```
 
